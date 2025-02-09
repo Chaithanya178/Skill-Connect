@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentors</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #f39c12;
+        }
+
+        /* Main Section */
+        section {
+            padding: 20px;
+            background-color: rgb(143, 238, 194);
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Mentor Cards */
+        #mentor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .mentor-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .mentor-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid #f39c12;
+        }
+
+        .mentor-card h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .mentor-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .mentor-card .skills {
+            font-style: italic;
+            color: #777;
+        }
+
+        .mentor-card .rating {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .mentor-card button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .mentor-card button:hover {
+            background-color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Mentors</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="mentors.html">Mentors</a></li>
+            <li><a href="messages.html">Messages</a></li>
+        </ul>
+    </nav>
+    <section id="mentors">
+        <h2>Available Mentors</h2>
+        <div id="mentor-list"></div>
+    </section>
+
+    <script>
+        // Mentor data
+        const mentors = [
+            {
+                name: "John Doe",
+                image: "https://via.placeholder.com/100",
+                skills: "Full Stack Development, JavaScript, React",
+                rating: "4.8",
+            },
+            {
+                name: "Jane Smith",
+                image: "https://via.placeholder.com/100",
+                skills: "Flutter, Mobile App Development, Dart",
+                rating: "4.7",
+            },
+            {
+                name: "Alice Johnson",
+                image: "https://via.placeholder.com/100",
+                skills: "Python, Machine Learning, Data Science",
+                rating: "4.9",
+            },
+            {
+                name: "Bob Brown",
+                image: "https://via.placeholder.com/100",
+                skills: "Cloud Computing, AWS, DevOps",
+                rating: "4.6",
+            },
+            {
+                name: "Charlie Davis",
+                image: "https://via.placeholder.com/100",
+                skills: "Cyber Security, Ethical Hacking, Network Security",
+                rating: "4.5",
+            },
+        ];
+
+        // Function to display mentors
+        function displayMentors() {
+            const mentorList = document.getElementById('mentor-list');
+            mentors.forEach(mentor => {
+                const mentorCard = document.createElement('div');
+                mentorCard.className = 'mentor-card';
+                mentorCard.innerHTML = `
+                    <img src="${mentor.image}" alt="${mentor.name}">
+                    <h3>${mentor.name}</h3>
+                    <p class="skills">${mentor.skills}</p>
+                    <p class="rating">Rating: ${mentor.rating} ⭐</p>
+                    <button onclick="requestToLearn('${mentor.name}')">Request to Learn</button>
+                `;
+                mentorList.appendChild(mentorCard);
+            });
+        }
+
+        // Function to handle "Request to Learn" button click
+        function requestToLearn(mentorName) {
+            alert(`You have requested to learn from ${mentorName}. We will contact you shortly!`);
+        }
+
+        // Display mentors when the page loads
+        displayMentors();
+    </script>
+</body>
+</html>

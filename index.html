@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Connect</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #6200ea;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 154, 158, 0.7);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 154, 158, 0.9);
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #bb86fc;
+        }
+
+        /* Header Styles */
+        header {
+            background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        header .btn {
+            background-color: white;
+            color: #6200ea;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        header .btn:hover {
+            background-color: #bb86fc;
+            color: white;
+        }
+
+        /* Keynotes Section */
+        .keynotes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .keynote-box {
+            background-color: #e8f5e9;
+            color: #388e3c;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .keynote-box:hover {
+            background-color: #dcedc8;
+            transform: scale(1.05);
+        }
+
+        .keynote-box:nth-child(2) {
+            background-color: #e3f2fd;
+            color: #1e88e5;
+        }
+
+        .keynote-box:nth-child(3) {
+            background-color: #f1f8e9;
+            color: #7cb342;
+        }
+
+        .keynote-box:nth-child(4) {
+            background-color: #fff3e0;
+            color: #fb8c00;
+        }
+
+        .keynote-box h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: rgb(193, 44, 44);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Input Fields */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #6200ea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #bb86fc;
+        }
+
+        /* Login Details Page */
+        .login-details {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            margin: 5% auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-details h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-details p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .login-details a {
+            color: #6200ea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-details a:hover {
+            color: #bb86fc;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <div class="logo">
+                <img src="https://img.icons8.com/color/48/000000/connected-people.png" alt="Logo">
+            </div>
+            <h1 class="title">Skill Connect</h1>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" id="dashboardLink">Dashboard</a></li>
+            <li><a href="#" id="skillsLink">Skills</a></li>
+            <li><a href="#" id="mentorsLink">Mentors</a></li>
+            <li><a href="#" id="messagesLink">Messages</a></li>
+            <li><a href="#" id="loginBtn">Login</a></li>
+            <li><a href="#" id="signupBtn">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h2>Learn & Share Skills</h2>
+        <p>Join our community to teach and learn new skills.</p>
+        <a href="skills.html" class="btn">Explore Skills</a>
+    </header>
+
+    <!-- Keynotes Section -->
+    <div class="keynotes">
+        <div class="keynote-box">
+            <h3>Peer to Peer Exchange</h3>
+            <p>A platform to exchange ideas and skills directly between users.</p>
+        </div>
+        <div class="keynote-box">
+            <h3>Barter-Based Services</h3>
+            <p>Connect with others for service exchanges based on mutual skills.</p>
+        </div>
+        <div class="keynote-box">
+            <h3>Browse & Get Ideas</h3>
+            <p>Explore skills and gain inspiration from others in the community.</p>
+        </div>
+        <div class="keynote-box">
+            <h3>Mentor Guidance</h3>
+            <p>Find mentors to guide you in your learning journey.</p>
+        </div>
+        <div class="keynote-box">
+            <h3>Personalized Recommendations</h3>
+            <p>Receive skill recommendations based on your age and abilities.</p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </form>
+            <p>New to Skill Connect? <a href="#" id="switchToSignup">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeSignup">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <input type="text" id="signupUsername" placeholder="Username" required>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+                <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                <input type="submit" value="Sign Up">
+            </form>
+            <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Login Details Page -->
+    <div class="login-details" id="loginDetails">
+        <h2>Login Details</h2>
+        <p><strong>Username:</strong> <span id="loggedInUsername"></span></p>
+        <p>Welcome back! You are now logged in.</p>
+        <p><a href="#" id="logoutBtn">Logout</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Skill Exchange Platform. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Modal functionality
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const closeSignup = document.getElementById('closeSignup');
+        const loginDetails = document.getElementById('loginDetails');
+        const switchToSignup = document.getElementById('switchToSignup');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const dashboardLink = document.getElementById('dashboardLink');
+        const skillsLink = document.getElementById('skillsLink');
+        const mentorsLink = document.getElementById('mentorsLink');
+        const messagesLink = document.getElementById('messagesLink');
+
+        let isLoggedIn = false;
+
+        // Open login modal
+        loginBtn.onclick = () => {
+            loginModal.style.display = 'block';
+        }
+
+        // Open sign up modal
+        signupBtn.onclick = () => {
+            signupModal.style.display = 'block';
+        }
+
+        // Close login modal
+        closeLogin.onclick = () => {
+            loginModal.style.display = 'none';
+        }
+
+        // Close sign up modal
+        closeSignup.onclick = () => {
+            signupModal.style.display = 'none';
+        }
+
+        // Switch to signup from login
+        switchToSignup.onclick = () => {
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'block';
+        }
+
+        // Switch to login from signup
+        switchToLogin.onclick = () => {
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'block';
+        }
+
+        // Handle Login Form Submission
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('loginUsername').value;
+            document.getElementById('loggedInUsername').textContent = username;
+
+            // Hide login modal and show login details
+            loginModal.style.display = 'none';
+            loginDetails.style.display = 'block';
+
+            // Set logged-in state
+            isLoggedIn = true;
+            updateNavigation();
+        });
+
+        // Handle Logout
+        logoutBtn.onclick = () => {
+            loginDetails.style.display = 'none';
+            isLoggedIn = false;
+            updateNavigation();
+        }
+
+        // Update navigation links based on login state
+        function updateNavigation() {
+            if (isLoggedIn) {
+                dashboardLink.href = "dashboard.html";
+                skillsLink.href = "skills.html";
+                mentorsLink.href = "mentors.html";
+                messagesLink.href = "messages.html";
+            } else {
+                dashboardLink.href = "#";
+                skillsLink.href = "#";
+                mentorsLink.href = "#";
+                messagesLink.href = "#";
+                alert("Please login to access this page.");
+            }
+        }
+
+        // Add click event listeners to restricted links
+        dashboardLink.onclick = () => updateNavigation();
+        skillsLink.onclick = () => updateNavigation();
+        mentorsLink.onclick = () => updateNavigation();
+        messagesLink.onclick = () => updateNavigation();
+
+        // Close modals if clicked outside of them
+        window.onclick = (event) => {
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (event.target === signupModal) {
+                signupModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+nav {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+ul li {
+    display: inline;
+    margin: 0 15px;
+}
+ul li a {
+    color: white;
+    text-decoration: none;
+}
+header {
+    text-align: center;
+    padding: 50px;
+    background: #f4f4f4;
+}
+.btn {
+    padding: 10px 20px;
+    background: blue;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}

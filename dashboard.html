@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f9, #e0e0f5);
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* Dark Theme Styles */
+        body.dark-theme {
+            background: linear-gradient(135deg, #121212, #1e1e1e);
+            color: #ffffff;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #6200ea, #7c4dff);
+            color: white;
+            padding: 1rem;
+            box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.5s ease;
+        }
+
+        .dark-theme .sidebar {
+            background: linear-gradient(135deg, #1e1e1e, #333);
+        }
+
+        .sidebar h2 {
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 1rem 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        /* Go to Skills Page Button */
+        .go-to-skills {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .go-to-skills button {
+            background-color: #ffffff;
+            color: #6200ea;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-theme .go-to-skills button {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .go-to-skills button:hover {
+            background-color: #bb86fc;
+            color: white;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #6200ea;
+            transition: color 0.5s ease;
+        }
+
+        .dark-theme .main-content h2 {
+            color: #bb86fc;
+        }
+
+        /* Section Styles */
+        .section {
+            display: none; /* Hide all sections by default */
+            margin-bottom: 2rem;
+        }
+
+        .section.active {
+            display: block; /* Show active section */
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            transition: color 0.5s ease;
+        }
+
+        .dark-theme .section h3 {
+            color: #ffffff;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section ul li {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 1rem);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-theme .section ul li {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .section ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Popular Skills Section */
+        .popular-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .popular-skills-grid div {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-theme .popular-skills-grid div {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .popular-skills-grid div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Animation for Loading Skills */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section ul li,
+        .popular-skills-grid div {
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .section ul li:nth-child(1) { animation-delay: 0.1s; }
+        .section ul li:nth-child(2) { animation-delay: 0.2s; }
+        .section ul li:nth-child(3) { animation-delay: 0.3s; }
+        .popular-skills-grid div:nth-child(1) { animation-delay: 0.1s; }
+        .popular-skills-grid div:nth-child(2) { animation-delay: 0.2s; }
+        .popular-skills-grid div:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Add a glowing effect to the active sidebar link */
+        .sidebar ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#my-skills" onclick="showSection('my-skills')" class="active">My Skills</a></li>
+            <li><a href="#recommended" onclick="showSection('recommended')">Recommended</a></li>
+            <li><a href="#messages" onclick="showSection('messages')">Messages</a></li>
+        </ul>
+
+        <!-- Go to Skills Page Button -->
+        <div class="go-to-skills">
+            <button onclick="goToSkillsPage()">Go to Skills Page</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- My Skills Section -->
+        <section id="my-skills" class="section active">
+            <h3>My Skills</h3>
+            <ul>
+                <li>JavaScript</li>
+                <li>React.js</li>
+                <li>Node.js</li>
+                <li>Python</li>
+                <li>Data Analysis</li>
+                <li>UI/UX Design</li>
+            </ul>
+        </section>
+
+        <!-- Recommended Section -->
+        <section id="recommended" class="section">
+            <h3>Recommended Skills</h3>
+            <ul>
+                <li>Machine Learning</li>
+                <li>Cloud Computing</li>
+                <li>Cybersecurity</li>
+                <li>Full Stack Development</li>
+                <li>Flutter Development</li>
+                <li>Artificial Intelligence</li>
+            </ul>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages" class="section">
+            <h3>Messages</h3>
+            <ul>
+                <li>New Mentor Request</li>
+                <li>Skill Update Available</li>
+                <li>Feedback Received</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        // Function to show the selected section
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active link in the sidebar
+            document.querySelectorAll('.sidebar ul li a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.sidebar ul li a[href="#${sectionId}"]`).classList.add('active');
+        }
+
+        // Function to redirect to the Skills page
+        function goToSkillsPage() {
+            window.location.href = "skills.html"; // Redirect to skills.html
+        }
+
+        // Show the default section (My Skills) on page load
+        window.onload = () => {
+            showSection('my-skills');
+        };
+    </script>
+</body>
+</html>

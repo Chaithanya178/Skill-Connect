@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Tech-themed background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+        nav {
+            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent background */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        .skill-box {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .skill-box span {
+            margin-left: 10px;
+        }
+        .trophy {
+            font-size: 1.2em;
+            margin-left: auto;
+        }
+        .beginner-skills {
+            margin-top: 20px;
+        }
+        .beginner-skills ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .beginner-skills ul li {
+            background-color: #e2e2e2;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .options button {
+            flex: 1;
+        }
+        .mentor-button {
+            margin-top: 20px;
+        }
+        .questionnaire {
+            margin-top: 20px;
+        }
+        .questionnaire label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .questionnaire input, .questionnaire select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .recommendation {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e2e2e2;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .recommendation h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Skills</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="mentors.html">Mentors</a></li>
+            <li><a href="messages.html">Messages</a></li>
+        </ul>
+    </nav>
+    <section id="skills">
+        <h2>Be an Expertise</h2>
+        <div id="skill-list"></div>
+        <button onclick="askUser()">Are you a beginner?</button>
+        <div class="options" id="options" style="display: none;">
+            <button onclick="handleResponse(true)">Yes</button>
+            <button onclick="handleResponse(false)">No</button>
+        </div>
+        <div class="beginner-skills" id="beginner-skills" style="display: none;">
+            <h3>Skills you can learn:</h3>
+            <ul>
+                <li>Full Stack Development</li>
+                <li>Flutter Mobile App Development</li>
+                <li>Front End Development</li>
+                <li>Back End Development</li>
+                <li>Cloud Computing</li>
+                <li>Machine Learning</li>
+                <li>Cyber Security</li>
+                <li>Java</li>
+                <li>Python</li>
+            </ul>
+        </div>
+        <div class="mentor-button" id="mentor-button" style="display: none;">
+            <button onclick="askMentor()">Would you like to be a mentor?</button>
+        </div>
+    </section>
+
+    <!-- Personalized Recommendation Section -->
+    <section class="questionnaire">
+        <h2>Personalized Skill Recommendation</h2>
+        <form id="questionnaire-form">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="achievements">Achievements (e.g., certifications, projects):</label>
+            <input type="text" id="achievements" name="achievements" placeholder="Enter your achievements" required>
+
+            <label for="capability">What are you good at?</label>
+            <select id="capability" name="capability" required>
+                <option value="">Select an option</option>
+                <option value="problem-solving">Problem Solving</option>
+                <option value="creativity">Creativity</option>
+                <option value="communication">Communication</option>
+                <option value="technical">Technical Skills</option>
+                <option value="none">None (I'm a beginner)</option>
+            </select>
+
+            <label for="interest">What are you interested in?</label>
+            <select id="interest" name="interest" required>
+                <option value="">Select an option</option>
+                <option value="web-development">Web Development</option>
+                <option value="mobile-apps">Mobile Apps</option>
+                <option value="data-science">Data Science</option>
+                <option value="cloud-computing">Cloud Computing</option>
+                <option value="cyber-security">Cyber Security</option>
+                <option value="ai-ml">Artificial Intelligence & Machine Learning</option>
+            </select>
+
+            <button type="button" onclick="generateRecommendation()">Get Recommendation</button>
+        </form>
+        <div class="recommendation" id="recommendation" style="display: none;">
+            <h3>Your Recommended Skills:</h3>
+            <ul id="recommended-skills"></ul>
+        </div>
+    </section>
+
+    <script>
+        function askUser() {
+            const options = document.getElementById('options');
+            options.style.display = 'flex'; // Show Yes/No options
+        }
+
+        function handleResponse(isBeginner) {
+            const skillList = document.getElementById('skill-list');
+            const beginnerSkills = document.getElementById('beginner-skills');
+            const options = document.getElementById('options');
+            const mentorButton = document.getElementById('mentor-button');
+
+            if (isBeginner) {
+                // User is a beginner
+                skillList.innerHTML = ''; // Clear previous content
+                beginnerSkills.style.display = 'block'; // Show beginner skills
+                mentorButton.style.display = 'none'; // Hide mentor button
+            } else {
+                // User is not a beginner
+                const skills = prompt("Enter your acquired skills separated by commas (e.g., HTML, CSS, JavaScript):");
+                if (skills) {
+                    skillList.innerHTML = ''; // Clear previous content
+                    skills.split(',').forEach(skill => {
+                        const skillBox = document.createElement('div');
+                        skillBox.className = 'skill-box';
+                        skillBox.innerHTML = `
+                            <span>${skill.trim()}</span>
+                            <span class="trophy">🏆</span>
+                        `;
+                        skillList.appendChild(skillBox);
+                    });
+                }
+                beginnerSkills.style.display = 'none'; // Hide beginner skills
+                mentorButton.style.display = 'block'; // Show mentor button
+            }
+            options.style.display = 'none'; // Hide Yes/No options after selection
+        }
+
+        function askMentor() {
+            const confirmMentor = confirm("Would you like to be a mentor?");
+            if (confirmMentor) {
+                alert("You are now a mentor! 🎉");
+            }
+        }
+
+        function generateRecommendation() {
+            const age = document.getElementById('age').value;
+            const achievements = document.getElementById('achievements').value;
+            const capability = document.getElementById('capability').value;
+            const interest = document.getElementById('interest').value;
+
+            let recommendedSkills = [];
+
+            if (capability === "none" || age < 18) {
+                recommendedSkills = [
+                    "Introduction to Programming",
+                    "HTML & CSS Basics",
+                    "Python for Beginners",
+                    "Introduction to Web Development",
+                ];
+            } else {
+                switch (interest) {
+                    case "web-development":
+                        recommendedSkills = [
+                            "Advanced JavaScript",
+                            "React.js",
+                            "Node.js",
+                            "Full Stack Development",
+                        ];
+                        break;
+                    case "mobile-apps":
+                        recommendedSkills = [
+                            "Flutter Development",
+                            "React Native",
+                            "Mobile App Design",
+                        ];
+                        break;
+                    case "data-science":
+                        recommendedSkills = [
+                            "Python for Data Science",
+                            "Machine Learning Basics",
+                            "Data Visualization",
+                        ];
+                        break;
+                    case "cloud-computing":
+                        recommendedSkills = [
+                            "AWS Fundamentals",
+                            "Google Cloud Platform",
+                            "Docker & Kubernetes",
+                        ];
+                        break;
+                    case "cyber-security":
+                        recommendedSkills = [
+                            "Ethical Hacking",
+                            "Network Security",
+                            "Cyber Security Fundamentals",
+                        ];
+                        break;
+                    case "ai-ml":
+                        recommendedSkills = [
+                            "Machine Learning",
+                            "Deep Learning",
+                            "Natural Language Processing",
+                        ];
+                        break;
+                    default:
+                        recommendedSkills = [
+                            "Problem Solving Techniques",
+                            "Communication Skills",
+                            "Technical Writing",
+                        ];
+                }
+            }
+
+            const recommendationDiv = document.getElementById('recommendation');
+            const recommendedSkillsList = document.getElementById('recommended-skills');
+            recommendedSkillsList.innerHTML = recommendedSkills.map(skill => `<li>${skill}</li>`).join('');
+            recommendationDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
